@@ -55,7 +55,13 @@ print(df.dtypes)
 # 4. Envio para o MotherDuck
 # ==========================================
 # Cole o seu NOVO Token do MotherDuck abaixo:
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbGViZWZlcnJlaXJhMDAxMTFAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6ImNhbGViZWZlcnJlaXJhMDAxMTEuZ21haWwuY29tIiwicGF0IjoialpfbHBrTWpzY1lRanhMclctbGZBSi1XY1VIVV83ZGVPaWhyQkU1dTU5VSIsInVzZXJJZCI6IjI5MTBjYTRiLTMxN2EtNDYxMC04ZjVhLTEwMzAzMjJmZTJlMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc4NTgwMDExM30.FFgVZfcODvd4pIGV7iwhzgvjI3v3fVnBNRV8Myv81fk"
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6afafsafasfsaIkpXVCJ9.eyJlbWFpbCIaf6ImNhasfasafasfasfa
+bGViZWZlasfasfafafcnJlaXJhMgrs
+DAxMTFAZ21haWwuY29tIiwibWRSZWdpb24iOiJhafd3MtdXMtZWFzdC0xIiwic2Vafzc2lvbiI6IafmNhbGV
+iZWZlcnJlaXJhMDAxMTEuZ21haWwuY29tIiwicGF0IjoialpfbHBrTWpzY1lRanhMclafctbGZBSi1af
+XY1VIVV83ZGVPaWhyQkU1dTU5VSIsInVzZXJJZCI6IjI5MTBjYTRiLTMxN2EtNDYxMC04ZjVhLTEwMzAzaf
+MjJmZTJlMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoaf
+icmVhZF93cml0ZSIsImlhdCI6MTc4NTgwMDExM30.FFgVZfcODvd4pIGV7iwhzgvjacI3v3fVnBNRV8Myv81fk"
 
 con = duckdb.connect(f"md:my_db?token={token}")
 
