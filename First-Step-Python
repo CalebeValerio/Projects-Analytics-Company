@@ -1,0 +1,66 @@
+import pandas as pd
+import duckdb
+
+# ==========================================
+# 1. Padronização de Texto
+# ==========================================
+df["name"] = df["name"].astype(str).str.lower()
+df["username"] = (
+    df["username"]
+    .astype(str)
+    .str.lower()
+    .str.replace(".", "_", regex=False)
+)
+df["email"] = df["email"].astype(str).str.lower()
+df["phone"] = (
+    df["phone"]
+    .astype(str)
+    .str.replace(" ", "", regex=False)
+    .str.replace(".", "-", regex=False)
+    .str.replace("x", "-", regex=False)
+)
+
+# ==========================================
+# 2. Expansão Segura dos JSONs (Address & Company)
+# ==========================================
+# Trata 'address' se ainda existir no df
+if "address" in df.columns:
+    address_df = pd.json_normalize(df["address"])
+    df = pd.concat([df.drop(columns=["address"]), address_df], axis=1)
+
+# Trata 'company' se ainda existir no df
+if "company" in df.columns:
+    company_df = pd.json_normalize(df["company"]).rename(
+        columns={
+            "name": "company_name",
+            "catchPhrase": "company_catch_phrase",
+            "bs": "company_bs",
+        }
+    )
+    df = pd.concat([df.drop(columns=["company"]), company_df], axis=1)
+
+# ==========================================
+# 3. Verificações da Base
+# ==========================================
+print("=== VALORES NULOS ===")
+print(df.isna().sum())
+
+print("\n=== DUPLICADOS ===")
+print(df.duplicated().sum())
+
+print("\n=== ESTRUTURA FINAL ===")
+print(df.dtypes)
+
+# ==========================================
+# 4. Envio para o MotherDuck
+# ==========================================
+# Cole o seu NOVO Token do MotherDuck abaixo:
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbGViZWZlcnJlaXJhMDAxMTFAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6ImNhbGViZWZlcnJlaXJhMDAxMTEuZ21haWwuY29tIiwicGF0IjoialpfbHBrTWpzY1lRanhMclctbGZBSi1XY1VIVV83ZGVPaWhyQkU1dTU5VSIsInVzZXJJZCI6IjI5MTBjYTRiLTMxN2EtNDYxMC04ZjVhLTEwMzAzMjJmZTJlMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc4NTgwMDExM30.FFgVZfcODvd4pIGV7iwhzgvjI3v3fVnBNRV8Myv81fk"
+
+con = duckdb.connect(f"md:my_db?token={token}")
+
+# Cria ou substitui a tabela 'usuarios_limpos' no MotherDuck
+con.execute("CREATE OR REPLACE TABLE usuarios_limpos AS SELECT * FROM df")
+
+print("\n✅ SUCESSO: Tabela 'usuarios_limpos' enviada para o MotherDuck!")
+con.close()
