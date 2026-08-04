@@ -78,7 +78,40 @@ Não existe uma única resposta correta para a limpeza. O mais importante é que
 ---
 
 ## 🗄️ 4. Análise e Insight Gerado (SQL)
-*Em breve...*
+*-----------------------------------------------
+SELECT DISTINCT(id) FROM my_db.usuarios_limpos 
+--Ha 10 usuarios existentes na base
+-----------------------------------------------
+
+------------------------------------------------
+SELECT DISTINCT(city) FROM my_db.usuarios_limpos 
+--Ha 10 diferentes cidades
+------------------------------------------------
+
+------------------------------------------------
+SELECT city
+       COUNT(*) AS numero de pessoas por cidade
+FROM my_db.usuarios_limpos
+--Cada usuario mora em uma Regiao diferente
+------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+SELECT company_name FROM my_db.usuarios_limpos 
+-- 10 empresas aparecem diferentes. Porem a empresa Romaguera aparece 2 vezes na primeira em Crona e na segunda em Jacobson!
+----------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+SELECT * FROM my_db.usuarios_limpos
+— NAO. Todos os dados foram tratados limpos e analisados antes de chegar aqui.
+------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------
+Não existe nenhum arquivo duplicado. Todos os arquivos duplicados ja foram analisados e tratados em python.
+-----------------------------------------------------------------------------------------------------------
+-----------------------------
+Nenhuma coluna foi removida.
+-----------------------------
+*
 
 ---
 
