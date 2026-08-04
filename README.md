@@ -23,11 +23,7 @@ Fonte de dados
 https://jsonplaceholder.typicode.com/users
 Objetivos
 
-Queremos um arquivo chamado
-
-clean_users.csv
-
-que possa ser entregue para outro analista sem necessidade de tratamento adicional.
+Queremos uma análise completa e bem estruturada desses dados!
 
 Requisitos
 
@@ -53,12 +49,6 @@ Existem registros duplicados?
 Quais colunas você decidiu remover e por quê?
 Entregáveis
 
-Quero receber:
-
-O notebook Python.
-O arquivo clean_users.csv.
-Um pequeno relatório explicando todas as transformações realizadas.
-Observações
 
 Não existe uma única resposta correta para a limpeza. O mais importante é que suas decisões façam sentido e sejam justificadas.
 
