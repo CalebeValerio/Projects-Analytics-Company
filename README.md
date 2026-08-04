@@ -62,7 +62,7 @@
 
 ## 🗄️ 4. Análise e Insight Gerado (SQL)
 
-```sql
+
 -- 1. Quantidade de usuários na base
 SELECT COUNT(DISTINCT id) FROM my_db.usuarios_limpos;
 -- Resposta: Há 10 usuários existentes na base.
@@ -82,3 +82,28 @@ SELECT DISTINCT company_name FROM my_db.usuarios_limpos;
 -- 5. Verificação de dados ausentes e duplicados
 SELECT * FROM my_db.usuarios_limpos;
 -- Resposta: Não há dados ausentes nem registros duplicados.
+
+
+---
+<img width="1095" height="824" alt="IMG_0950" src="https://github.com/user-attachments/assets/7bf08c37-873d-4e8f-ad69-584fb8e9b28b" />
+
+---
+
+
+
+### 🎙️ Apresentação Executiva do Dashboard (Relatório do Projeto)
+
+> **De:** Calebe Valério (Analytics Engineer)  
+> **Para:** Liderança de Business Intelligence  
+> **Assunto:** Diagnóstico da Base de Clientes via API JSONPlaceholder  
+
+Prezados, apresento os resultados da higienização da base de clientes consumida via API REST, processada em Python/Pandas, armazenada no DuckDB e visualizada no Looker Studio. 
+
+Abaixo estão as respostas diretas aos requisitos solicitados:
+
+1. **Volume de Usuários:** A base contém exatamente **10 usuários cadastrados**.
+2. **Distribuição Geográfica (Cidades):** Existem **10 cidades distintas**. A presença de clientes é 100% pulverizada, significando que cada cliente reside em uma cidade diferente (todas possuem 1 usuário, sem concentração única).
+3. **Mapeamento de Empresas:** Foram identificadas **10 entidades empresariais**. Destaque para o grupo *Romaguera*, que atua com duas divisões operacionais distintas na base (*Romaguera-Crona* e *Romaguera-Jacobson*).
+4. **Qualidade dos Dados (Ausentes e Duplicados):** A base de dados final apresenta **0% de registros nulos e 0% de duplicidades**, estando completamente tratada e auditada pelo pipeline de ETL.
+5. **Decisão de Arquitetura de Colunas:** Todas as colunas estruturais foram preservadas e organizadas (incluindo geolocalização e contatos) para garantir que o time de BI tenha granularidade total sem necessidade de novos tratamentos.
+
