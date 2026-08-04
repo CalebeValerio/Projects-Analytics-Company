@@ -9,7 +9,60 @@
 ---
 
 ## 🎯 1. O Problema de Negócio (Business Case)
-*Em breve...*
+*📧 Mensagem do seu chefe
+
+Assunto: Limpeza da base de clientes
+
+Bom dia, Calebe.
+
+Recebemos uma lista de clientes da equipe de desenvolvimento através de uma API. Antes que esses dados possam ser utilizados pelo time de Business Intelligence, precisamos garantir que estejam organizados e fáceis de analisar.
+
+Sua tarefa é importar os dados da API, realizar a limpeza necessária e entregar uma base pronta para análise.
+
+Fonte de dados
+https://jsonplaceholder.typicode.com/users
+Objetivos
+
+Queremos um arquivo chamado
+
+clean_users.csv
+
+que possa ser entregue para outro analista sem necessidade de tratamento adicional.
+
+Requisitos
+
+Você deverá:
+
+Importar os dados da API.
+Avaliar a qualidade dos dados.
+Organizar a estrutura da tabela.
+Remover informações desnecessárias.
+Transformar os campos aninhados (JSON dentro de JSON) em colunas simples.
+Garantir que todos os nomes das colunas sejam padronizados.
+Entregar um DataFrame limpo.
+Além da limpeza
+
+Antes de finalizar, preciso que você me responda as seguintes perguntas.
+
+Quantos usuários existem na base?
+Quantas cidades diferentes existem?
+Qual cidade possui mais usuários?
+Quantas empresas diferentes aparecem?
+Existe algum dado ausente?
+Existem registros duplicados?
+Quais colunas você decidiu remover e por quê?
+Entregáveis
+
+Quero receber:
+
+O notebook Python.
+O arquivo clean_users.csv.
+Um pequeno relatório explicando todas as transformações realizadas.
+Observações
+
+Não existe uma única resposta correta para a limpeza. O mais importante é que suas decisões façam sentido e sejam justificadas.
+
+💼 (Fim da mensagem do chefe)*
 
 ---
 
