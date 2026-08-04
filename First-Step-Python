@@ -1,72 +1,95 @@
+----------------------------------------------------
+Pegando os dados vindo de fora
+----------------------------------------------------
 import pandas as pd
+import requests
+
+url = 'https://jsonplaceholder.typicode.com/users'
+result = requests.get(url)
+
+data = result.json()
+
+df = pd.DataFrame(data)
+
+
 import duckdb
 
-# ==========================================
-# 1. Padronização de Texto
-# ==========================================
-df["name"] = df["name"].astype(str).str.lower()
-df["username"] = (
-    df["username"]
-    .astype(str)
-    .str.lower()
-    .str.replace(".", "_", regex=False)
+
+1. Padronização de Texto
+
+df["name"] = df["name"].astype(str).str.lower() 
+df["username"] = ( 
+df["username"] 
+.astype(str) 
+.str.lower() 
+.str.replace(".", "_", regex=False) 
+) 
+df["email"] = df["email"].astype(str).str.lower() 
+df["phone"] = ( 
+df["phone"] 
+.astype(str) 
+.str.replace(" ", "", regex=False) 
+.str.replace(".", "-", regex=False) 
+.str.replace("x", "-", regex=False) 
 )
-df["email"] = df["email"].astype(str).str.lower()
-df["phone"] = (
-    df["phone"]
-    .astype(str)
-    .str.replace(" ", "", regex=False)
-    .str.replace(".", "-", regex=False)
-    .str.replace("x", "-", regex=False)
-)
 
-# ==========================================
-# 2. Expansão Segura dos JSONs (Address & Company)
-# ==========================================
-# Trata 'address' se ainda existir no df
-if "address" in df.columns:
-    address_df = pd.json_normalize(df["address"])
-    df = pd.concat([df.drop(columns=["address"]), address_df], axis=1)
 
-# Trata 'company' se ainda existir no df
-if "company" in df.columns:
-    company_df = pd.json_normalize(df["company"]).rename(
-        columns={
-            "name": "company_name",
-            "catchPhrase": "company_catch_phrase",
-            "bs": "company_bs",
-        }
-    )
-    df = pd.concat([df.drop(columns=["company"]), company_df], axis=1)
+2. Expansão Segura dos JSONs (Address & Company)
 
-# ==========================================
-# 3. Verificações da Base
-# ==========================================
-print("=== VALORES NULOS ===")
+Trata 'address' se ainda existir no df
+if "address" in df.columns: 
+address_df = pd.json_normalize(df["address"]) 
+df = pd.concat([df.drop(columns=["address"]), address_df], axis=1)
+
+Trata 'company' se ainda existir no df
+if "company" in df.columns: 
+company_df = pd.json_normalize(df["company"]).rename( 
+columns={ 
+"name": "company_name", 
+"catchPhrase": "company_catch_phrase", 
+"bs": "company_bs", 
+} 
+) 
+df = pd.concat([df.drop(columns=["company"]), company_df], axis=1)
+
+
+3. Verificações da Base
+
+print("= VALORES NULOS =") 
 print(df.isna().sum())
 
-print("\n=== DUPLICADOS ===")
+print("\n= DUPLICADOS =") 
 print(df.duplicated().sum())
 
-print("\n=== ESTRUTURA FINAL ===")
+print("\n= ESTRUTURA FINAL =") 
 print(df.dtypes)
 
-# ==========================================
-# 4. Envio para o MotherDuck
-# ==========================================
-# Cole o seu NOVO Token do MotherDuck abaixo:
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6afafsafasfsaIkpXVCJ9.eyJlbWFpbCIaf6ImNhasfasafasfasfa
-bGViZWZlasfasfafafcnJlaXJhMgrs
-DAxMTFAZ21haWwuY29tIiwibWRSZWdpb24iOiJhafd3MtdXMtZWFzdC0xIiwic2Vafzc2lvbiI6IafmNhbGV
-iZWZlcnJlaXJhMDAxMTEuZ21haWwuY29tIiwicGF0IjoialpfbHBrTWpzY1lRanhMclafctbGZBSi1af
-XY1VIVV83ZGVPaWhyQkU1dTU5VSIsInVzZXJJZCI6IjI5MTBjYTRiLTMxN2EtNDYxMC04ZjVhLTEwMzAzaf
-MjJmZTJlMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoaf
+
+4. Envio para o MotherDuck
+
+Cole o seu NOVO Token do MotherDuck abaixo:
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6afafsafasfsaIkpXVCJ9.eyJlbWFpbCIaf6ImNhasfasafasfasfa 
+bGViZWZlasfasfafafcnJlaXJhMgrs 
+DAxMTFAZ21haWwuY29tIiwibWRSZWdpb24iOiJhafd3MtdXMtZWFzdC0xIiwic2Vafzc2lvbiI6IafmNhbGV 
+iZWZlcnJlaXJhMDAxMTEuZ21haWwuY29tIiwicGF0IjoialpfbHBrTWpzY1lRanhMclafctbGZBSi1af 
+XY1VIVV83ZGVPaWhyQkU1dTU5VSIsInVzZXJJZCI6IjI5MTBjYTRiLTMxN2EtNDYxMC04ZjVhLTEwMzAzaf 
+MjJmZTJlMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoaf 
 icmVhZF93cml0ZSIsImlhdCI6MTc4NTgwMDExM30.FFgVZfcODvd4pIGV7iwhzgvjacI3v3fVnBNRV8Myv81fk"
 
 con = duckdb.connect(f"md:my_db?token={token}")
 
-# Cria ou substitui a tabela 'usuarios_limpos' no MotherDuck
+Cria ou substitui a tabela 'usuarios_limpos' no MotherDuck
 con.execute("CREATE OR REPLACE TABLE usuarios_limpos AS SELECT * FROM df")
 
-print("\n✅ SUCESSO: Tabela 'usuarios_limpos' enviada para o MotherDuck!")
+print("\n✅ SUCESSO: Tabela 'usuarios_limpos' enviada para o MotherDuck!") 
 con.close()
+
+
+
+|   id | name             | username   | email                     | phone                | website       | street            | suite     | city          | zipcode    |   geo.lat |   geo.lng | company_name       | company_catch_phrase                     | company_bs                           |
+|-----:|:-----------------|:-----------|:--------------------------|:---------------------|:--------------|:------------------|:----------|:--------------|:-----------|----------:|----------:|:-------------------|:-----------------------------------------|:-------------------------------------|
+|    1 | leanne graham    | bret       | sincere@april.biz         | 1-770-736-8031-56442 | hildegard.org | Kulas Light       | Apt. 556  | Gwenborough   | 92998-3874 |  -37.3159 |   81.1496 | Romaguera-Crona    | Multi-layered client-server neural-net   | harness real-time e-markets          |
+|    2 | ervin howell     | antonette  | shanna@melissa.tv         | 010-692-6593-09125   | anastasia.net | Victor Plains     | Suite 879 | Wisokyburgh   | 90566-7771 |  -43.9509 |  -34.4618 | Deckow-Crist       | Proactive didactic contingency           | synergize scalable supply-chains     |
+|    3 | clementine bauch | samantha   | nathan@yesenia.net        | 1-463-123-4447       | ramiro.info   | Douglas Extension | Suite 847 | McKenziehaven | 59590-4157 |  -68.6102 |  -47.0653 | Romaguera-Jacobson | Face to face bifurcated interface        | e-enable strategic applications      |
+|    4 | patricia lebsack | karianne   | julianne.oconner@kory.org | 493-170-9623-156     | kale.biz      | Hoeger Mall       | Apt. 692  | South Elvis   | 53919-4257 |   29.4572 | -164.299  | Robel-Corkery      | Multi-tiered zero tolerance productivity | transition cutting-edge web services |
+|    5 | chelsey dietrich | kamren     | lucio_hettinger@annie.ca  | (254)954-1289        | demarco.info  | Skiles Walks      | Suite 351 | Roscoeview    | 33263      |  -31.8129 |   62.5342 | Keebler LLC        | User-centric fault-tolerant solution     | revolutionize end-to-end systems     |
