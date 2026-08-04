@@ -82,3 +82,11 @@ SELECT DISTINCT company_name FROM my_db.usuarios_limpos;
 -- 5. Verificação de dados ausentes e duplicados
 SELECT * FROM my_db.usuarios_limpos;
 -- Resposta: Não há dados ausentes nem registros duplicados.
+
+
+
+
+
+
+<img width="1095" height="824" alt="IMG_0950" src="https://github.com/user-attachments/assets/defb18cd-6a55-4bd9-be7a-95df38d55fc7" />
+
