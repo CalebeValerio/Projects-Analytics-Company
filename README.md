@@ -65,8 +65,16 @@ Não existe uma única resposta correta para a limpeza. O mais importante é que
 ---
 
 ## 🐍 3. Amostra dos Dados Tratados (Pandas DataFrame)
-*Em breve...*
+*
 
+|   id | name             | username   | email                     | phone                | website       | street            | suite     | city          | zipcode    |   geo.lat |   geo.lng | company_name       | company_catch_phrase                     | company_bs                           |
+|-----:|:-----------------|:-----------|:--------------------------|:---------------------|:--------------|:------------------|:----------|:--------------|:-----------|----------:|----------:|:-------------------|:-----------------------------------------|:-------------------------------------|
+|    1 | leanne graham    | bret       | sincere@april.biz         | 1-770-736-8031-56442 | hildegard.org | Kulas Light       | Apt. 556  | Gwenborough   | 92998-3874 |  -37.3159 |   81.1496 | Romaguera-Crona    | Multi-layered client-server neural-net   | harness real-time e-markets          |
+|    2 | ervin howell     | antonette  | shanna@melissa.tv         | 010-692-6593-09125   | anastasia.net | Victor Plains     | Suite 879 | Wisokyburgh   | 90566-7771 |  -43.9509 |  -34.4618 | Deckow-Crist       | Proactive didactic contingency           | synergize scalable supply-chains     |
+|    3 | clementine bauch | samantha   | nathan@yesenia.net        | 1-463-123-4447       | ramiro.info   | Douglas Extension | Suite 847 | McKenziehaven | 59590-4157 |  -68.6102 |  -47.0653 | Romaguera-Jacobson | Face to face bifurcated interface        | e-enable strategic applications      |
+|    4 | patricia lebsack | karianne   | julianne.oconner@kory.org | 493-170-9623-156     | kale.biz      | Hoeger Mall       | Apt. 692  | South Elvis   | 53919-4257 |   29.4572 | -164.299  | Robel-Corkery      | Multi-tiered zero tolerance productivity | transition cutting-edge web services |
+|    5 | chelsey dietrich | kamren     | lucio_hettinger@annie.ca  | (254)954-1289        | demarco.info  | Skiles Walks      | Suite 351 | Roscoeview    | 33263      |  -31.8129 |   62.5342 | Keebler LLC        | User-centric fault-tolerant solution     | revolutionize end-to-end systems     |
+*
 ---
 
 ## 🗄️ 4. Análise e Insight Gerado (SQL)
